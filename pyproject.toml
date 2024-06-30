@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "borrent-client"
+version = "0.1.0"
+description = ""
+authors = ["Arkhip McNutt <ortiz47@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+borrent-parser = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
