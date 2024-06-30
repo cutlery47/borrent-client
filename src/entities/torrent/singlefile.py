@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from src.dataclasses.torrent.metainfo import Info
+from src.entities.torrent.metainfo import Info
 
 @dataclass
 class SingleFileInfo(Info):

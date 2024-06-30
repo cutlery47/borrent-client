@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from src.dataclasses.torrent.metainfo import Info
+from src.entities.torrent.metainfo import Info
 
 @dataclass
-class File:
+class FileInfo:
     """
     Attributes:
         length (int): Length of the file in bytes.
@@ -14,11 +14,11 @@ class File:
     md5sum: str
 
 @dataclass
-class MultiFile(Info):
+class MultiFileInfo(Info):
     """
     Attributes:
         name (str): The name of the directory in which to store all the files.
         files (list): A list of dictionaries.
     """
     name: str
-    files: list[File]
+    files: list[FileInfo]

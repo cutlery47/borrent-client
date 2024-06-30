@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+*.torrent
 build/
 develop-eggs/
 dist/
