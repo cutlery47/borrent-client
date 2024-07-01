@@ -8,5 +8,5 @@ if __name__ == "__main__":
     except IndexError as err:
         raise Exception("A path to the .torrent file should be provided")
 
-    client = BorrentClient(path=path)
+    client = BorrentClient(path=path, host='0.0.0.0', port=6889)
     client.exec()

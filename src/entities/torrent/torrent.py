@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Info:
+class TorrentInfo:
     """
     Attributes:
         piece_length (int): Number of bytes in each piece.
@@ -15,7 +15,7 @@ class Info:
 
 
 @dataclass
-class MetaInfo:
+class Torrent:
     """
     Attributes:
         info (Info): A dictionary that describes the file(s) of the torrent.
@@ -26,7 +26,7 @@ class MetaInfo:
         created_by: (Optional) Name and version of the program used to create the .torrent.
         encoding: (Optional) The encoding format used to generate the pieces part of the info dictionary.
     """
-    info: Info
+    info: TorrentInfo
     announce: str
     announce_list: list
     creation_date: str

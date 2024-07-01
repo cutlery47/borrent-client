@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from src.entities.torrent.metainfo import Info
+from src.entities.torrent.torrent import TorrentInfo
 
 @dataclass
 class FileInfo:
@@ -14,7 +14,7 @@ class FileInfo:
     md5sum: str
 
 @dataclass
-class MultiFileInfo(Info):
+class TorrentMultiFileInfo(TorrentInfo):
     """
     Attributes:
         name (str): The name of the directory in which to store all the files.

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from src.entities.torrent.metainfo import Info
+from src.entities.torrent.torrent import TorrentInfo
 
 @dataclass
-class SingleFileInfo(Info):
+class TorrentSingleFileInfo(TorrentInfo):
     """
     Attributes:
         name (str): The file name
