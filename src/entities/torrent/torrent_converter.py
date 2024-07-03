@@ -1,8 +1,7 @@
 from borrent_parser.decoder import Decoder
 
 from src.entities.torrent.torrent import TorrentInfo, Torrent
-from src.entities.torrent.multifile import TorrentMultiFileInfo, FileInfo
-from src.entities.torrent.singlefile import TorrentSingleFileInfo
+from src.entities.torrent.info import TorrentSingleFileInfo, TorrentMultiFileInfo, FileInfo
 
 from dataclasses import asdict
 

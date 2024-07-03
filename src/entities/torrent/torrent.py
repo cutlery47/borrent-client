@@ -1,18 +1,19 @@
 from dataclasses import dataclass
 
+from abc import ABC, abstractmethod
 
 @dataclass
-class TorrentInfo:
+class TorrentInfo(ABC):
     """
     Attributes:
         piece_length (int): Number of bytes in each piece.
         pieces (bytes): String consisting of the concatenation of all 20-byte SHA1 hash values.
         private (int): (Optional). If it is set to "1", the client MUST publish its presence to get other peers.
     """
-    piece_length: int
-    pieces: bytes
-    private: int
 
+    @abstractmethod
+    def size(self):
+        raise NotImplementedError
 
 @dataclass
 class Torrent:
@@ -33,3 +34,6 @@ class Torrent:
     comment: str
     created_by: str
     encoding: str
+
+
+
