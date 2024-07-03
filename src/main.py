@@ -1,4 +1,4 @@
-from client.client import BorrentClient
+from src.client import BorrentClient
 
 import sys
 
