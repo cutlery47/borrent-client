@@ -9,4 +9,4 @@ if __name__ == "__main__":
         raise Exception("A path to the .torrent file should be provided")
 
     client = BorrentClient(path=path)
-    client.exec()
+    client.start()

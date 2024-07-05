@@ -1,19 +1,20 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
-from abc import ABC, abstractmethod
+from src.entities.torrent.torrent_info import TorrentInfo, TorrentInfoConverter
+
+from bcoding import bdecode
+
 
 @dataclass
-class TorrentInfo(ABC):
-    """
-    Attributes:
-        piece_length (int): Number of bytes in each piece.
-        pieces (bytes): String consisting of the concatenation of all 20-byte SHA1 hash values.
-        private (int): (Optional). If it is set to "1", the client MUST publish its presence to get other peers.
-    """
+class TorrentStats:
+    info_hash: bytes = b''
+    leechers: int = 0
+    seeders: int = 0
+    left: int = 0
+    downloaded: int = 0
+    uploaded: int = 0
+    connection_id: int = 0
 
-    @abstractmethod
-    def size(self):
-        raise NotImplementedError
 
 @dataclass
 class Torrent:
@@ -34,6 +35,39 @@ class Torrent:
     comment: str
     created_by: str
     encoding: str
+
+
+class TorrentConverter:
+
+    @staticmethod
+    def into_dict(torrent: Torrent) -> dict:
+        info_dict = TorrentInfoConverter.into_dict(torrent.info)
+        torrent_dict = asdict(torrent)
+        torrent_dict['info'] = info_dict
+        # replacing underscore in the key in order to match the initial bencode
+        torrent_dict['announce-list'] = torrent_dict.pop('announce_list')
+        torrent_dict['creation date'] = torrent_dict.pop('creation_date')
+        torrent_dict['created by'] = torrent_dict.pop('created_by')
+
+        return {k: v for k, v in torrent_dict.items() if v is not None}
+
+    @staticmethod
+    def into_torrent(bin_torrent: bytes) -> Torrent:
+        decoded_torrent = bdecode(bin_torrent)
+
+        info_dict: dict = decoded_torrent['info']
+        info = TorrentInfoConverter.into_info(info_dict)
+
+        torrent = Torrent(
+            info=info,
+            announce=decoded_torrent.get('announce'),
+            announce_list=decoded_torrent.get('announce-list'),
+            creation_date=decoded_torrent.get('creation date'),
+            comment=decoded_torrent.get('comment'),
+            created_by=decoded_torrent.get('created by'),
+            encoding=decoded_torrent.get('encoding')
+        )
+        return torrent
 
 
 
