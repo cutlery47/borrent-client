@@ -54,7 +54,7 @@ class AnnounceResponse:
         peers_data_length = len(response) - FIXED_LENGTH
         peers_amount = peers_data_length // PEER_DATA_LENGTH
 
-        format = '!iiiii' + peers_amount * 'ih'
+        format = '!IIIII' + peers_amount * 'iH'
         response_data = struct.unpack(format, response)
 
         self.action = response_data[0]
