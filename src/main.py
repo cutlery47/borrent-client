@@ -1,6 +1,7 @@
 from src.client import BorrentClient
 
 import sys
+import asyncio
 
 if __name__ == "__main__":
     try:
@@ -9,4 +10,4 @@ if __name__ == "__main__":
         raise Exception("A path to the .torrent file should be provided")
 
     client = BorrentClient(path=path)
-    client.start()
+    asyncio.run(client.start())

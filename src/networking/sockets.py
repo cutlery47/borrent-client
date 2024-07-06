@@ -2,9 +2,10 @@ from src.exceptions.socket import ConnectionException
 
 from socket import AF_INET, SOCK_STREAM, SOCK_DGRAM, socket
 
+
 class TCPSocket:
 
-    def __init__(self, dest_host, dest_port, timeout, src_port=None):
+    def __init__(self, dest_host, dest_port, timeout, src_port: int = None):
         self.src_port = src_port
         self.dest_host = dest_host
         self.dest_port = dest_port
@@ -35,11 +36,13 @@ class TCPSocket:
 
 class UDPSocket:
 
-    def __init__(self, timeout: int, src_port: int = None):
+    def __init__(self, timeout: int, src_port: int = None, blocking: bool = True):
         self.src_port = src_port
 
-        self._socket = socket(family=AF_INET, type=SOCK_DGRAM)
+        self._socket = socket(family=AF_INET, type=SOCK_DGRAM, )
         self._socket.settimeout(timeout)
+        if not blocking:
+            self._socket.setblocking(False)
 
         if self.src_port is not None:
             self._socket.bind(('0.0.0.0', self.src_port))
